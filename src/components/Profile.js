@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Paper } from '@material-ui/core'
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 import { useNavigate } from "react-router-dom";
 import firebase from 'firebase/compat/app';
@@ -15,7 +16,7 @@ const Profile = () => {
     const accountDetails_json = JSON.parse(accountDetails);
 
     const bodyStyle = {margin: "0.5rem"};
-    const navbarStyle = {padding :'0.5rem', boxSizing: 'border-box', height:'max-content', width:'100%', margin:"0rem auto", display: 'flex', justifyContent: 'right'};
+    const navbarStyle = {padding :'0.5rem', boxSizing: 'border-box', height:'max-content', width:'100%', margin:"0rem auto", display: 'flex', justifyContent: 'center'};
     const photoStyle = {width: '4rem', height: '4rem'};
 
     console.log(accountDetails);
@@ -38,9 +39,15 @@ const Profile = () => {
         <Grid style={bodyStyle}>
             <Grid>
                 <Paper elevation={10} style={navbarStyle}>
-                    <Button onClick={onEditPhoto}>
-                        <img src={profilePhoto} alt="" style={photoStyle}/>
-                    </Button>
+                    <Stack>
+                        <Button onClick={onEditPhoto}>
+                            <img src={profilePhoto} alt="" style={photoStyle}/>
+                        </Button>
+                        <p>User ID：{accountDetails_json.uid}</p>
+                        <p>E-mail：{accountDetails_json.email}</p>
+                        <p>Provider：{accountDetails_json.providerData.map(x => x.providerId).join(", ")}</p>
+                        <p>PhoneNumber：{accountDetails_json.phoneNumber}</p>
+                    </Stack>
                 </Paper>
             </Grid>
             <Grid>
