@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from './components/Login.js';
+import Profile from './components/Profile.js';
+import PhotoCrop from './components/PhotoCrop.js';
+
+import { Routes, Route } from 'react-router-dom';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<p>http://localhost:3000/Login<br />http://localhost:3000/Profile</p>}/>
+            <Route path="/Login" element={<Login />}/>
+            <Route path="/Profile" element={<Profile />}/>
+            <Route path="/PhotoCrop" element={<PhotoCrop />}/>
+        </Routes>
+    );
 }
 
 export default App;
