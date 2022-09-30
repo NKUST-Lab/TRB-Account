@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/trb-account/static/css/main.4d8d407a.css",
+    "main.js": "/trb-account/static/js/main.2251696a.js",
+    "static/js/787.6fa28d5b.chunk.js": "/trb-account/static/js/787.6fa28d5b.chunk.js",
+    "index.html": "/trb-account/index.html",
+    "main.4d8d407a.css.map": "/trb-account/static/css/main.4d8d407a.css.map",
+    "main.2251696a.js.map": "/trb-account/static/js/main.2251696a.js.map",
+    "787.6fa28d5b.chunk.js.map": "/trb-account/static/js/787.6fa28d5b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4d8d407a.css",
+    "static/js/main.2251696a.js"
+  ]
+}
