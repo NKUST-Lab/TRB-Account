@@ -1,6 +1,16 @@
-function ImageExist(url) {
+function imageExist(url) {
     var img = new Image();
     img.src = url;
-    return img.height !== 0;
+    if (img.complete) {
+        return true;
+    } else {
+        img.onload = () => {
+            return true;
+        };
+        
+        img.onerror = () => {
+            return false;
+        };
+    }
 }
-export default ImageExist;
+export default imageExist;

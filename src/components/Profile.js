@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 
 import { useNavigate } from "react-router-dom";
 import firebase from 'firebase/compat/app';
-import ImageExist from '../function/ImageExist';
+import imageExist from '../function/imageExist';
 
 const Profile = () => {
     let navigate = useNavigate();
@@ -22,7 +22,7 @@ const Profile = () => {
     console.log(accountDetails);
 
     var profilePhoto = `https://toysrbooks.com/dev/v0.1/photo/${accountDetails_json.uid}.png`;
-    if (ImageExist(profilePhoto) === false) {
+    if (imageExist(profilePhoto) === false) {
         profilePhoto = accountDetails_json.photoURL;
     }
 
@@ -32,7 +32,7 @@ const Profile = () => {
     }
 
     const onEditPhoto = () => {
-        navigate('/PhotoCrop');
+        navigate(`/PhotoCrop/${accountDetails_json.uid}`);
     }
 
     return(

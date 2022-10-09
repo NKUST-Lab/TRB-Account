@@ -8,6 +8,7 @@ import firebaseConfig from '../firebaseConfig';
 import uiConfig from '../uiConfig';
 
 import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 
 
@@ -57,12 +58,11 @@ const Login=()=>{
         });
     };
     
-    window.addEventListener('load', function() {
+    useEffect(() => {
         initApp()
-    });
-
-    // The start method will wait until the DOM is loaded.
-    ui.start('#firebaseui-auth-container', uiConfig);
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    }, [])
 
     const paperStyle={padding :'1rem',height:'70vh',width:'25vw', margin:"4rem auto"}
     
