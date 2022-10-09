@@ -17,7 +17,7 @@ const Profile = () => {
 
     const bodyStyle = {margin: "0.5rem"};
     const navbarStyle = {padding :'0.5rem', boxSizing: 'border-box', height:'max-content', width:'100%', margin:"0rem auto", display: 'flex', justifyContent: 'center'};
-    const photoStyle = {width: '4rem', height: '4rem'};
+    const photoStyle = {width: '4rem', height: '4rem', borderRadius: '50%'};
 
 
     var profilePhoto = `https://toysrbooks.com/dev/v0.1/photo/${accountDetails_json.uid}.png`;
