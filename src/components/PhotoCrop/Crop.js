@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { UpdatePreview } from './Preview';
 import { SetData } from "../../actions/SetData.js";
@@ -8,6 +8,7 @@ import face_outline_outside from "./crop/face_outline_outside.png";
 const Crop = props => {
     const dispatch = useDispatch();
     const data = useSelector(state => state.reducer);
+    const [photo, setPhoto] = useState();
     const x = data?.x;
     const y = data?.y;
     const file = data?.file;
@@ -25,6 +26,7 @@ const Crop = props => {
 
     // reset data
     useEffect(() => {
+        console.log('render')
         dispatch(SetData({
             file: null, 
             face_photo: null,
@@ -34,6 +36,7 @@ const Crop = props => {
             x: 0,
             y: 0
         }));
+        
     }, [])
 
     // 取得畫布在視窗的位置
@@ -50,11 +53,17 @@ const Crop = props => {
         crop_canvas.onresize = function(e){ reOffset(); }
     }, []);
 
-    // 處理圖片旋轉
     useEffect(() => {
+        onProcessRotate();
+    }, [file, rotate]);
+
+    useEffect(() => {
+        onProcessCropImage();
+    }, [photo, size])
+    
+    // 處理圖片旋轉
+    function onProcessRotate() {
         if (file === null) { return; }
-        const process_rotate_canvas = document.getElementById('processRotateCanvas');
-        const process_rotate_canvas_context = process_rotate_canvas.getContext('2d');
         const initial_image = new Image();
         initial_image.src = file;
         if (initial_image.complete) {
@@ -66,6 +75,8 @@ const Crop = props => {
         }
 
         function processRotate() {
+            const process_rotate_canvas = document.getElementById('processRotateCanvas');
+            const process_rotate_canvas_context = process_rotate_canvas.getContext('2d');
             process_rotate_canvas.width = 1200;
             process_rotate_canvas.height = 1200;
             crop_canvas_width = process_rotate_canvas.width;
@@ -94,16 +105,20 @@ const Crop = props => {
             // 旋轉後的原始圖片
             const rotated_photo = document.getElementById('rotatedPhoto');
             rotated_photo.src = process_rotate_canvas.toDataURL('image/png');
+            setPhoto(process_rotate_canvas.toDataURL('image/png'));
         }
-    }, [file, rotate]);
+    }
 
-    useEffect(() => {
+    function onProcessCropImage() {
         crop_canvas = document.getElementById('cropCanvas');
         crop_canvas_context = crop_canvas.getContext("2d");
         crop_canvas.width = 1200;
         crop_canvas.height = 1200;
         crop_canvas_width = crop_canvas.width;
         crop_canvas_height = crop_canvas.height;
+
+        // 重設畫布
+        crop_canvas_context.clearRect(0, 0, crop_canvas_width, crop_canvas_height);
 
         // // 設定預設背景
         crop_canvas_context.fillStyle = "rgba(0, 0, 0, 0.5)";
@@ -135,14 +150,16 @@ const Crop = props => {
             crop_canvas.onmouseout=handleMouseOut;
             crop_canvas.onmousewheel=handleMouseWheel;
         }
+    }
     
-    }, [file, rotate, size])
-    
+
     function drawAll(){
         crop_canvas = document.getElementById('cropCanvas');
         crop_canvas_context = crop_canvas.getContext("2d");
         // 重設畫布
-        crop_canvas_context.clearRect(0,0,crop_canvas_width,crop_canvas_height);
+        crop_canvas_context.clearRect(0, 0, crop_canvas_width, crop_canvas_height);
+
+        if (file === null) { return; }
 
         // 讓圖片可以按原比例呈現
         const {x, y, width, height, imageFile, size} = crop_image_parameters;

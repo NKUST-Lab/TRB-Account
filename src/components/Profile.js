@@ -19,7 +19,6 @@ const Profile = () => {
     const navbarStyle = {padding :'0.5rem', boxSizing: 'border-box', height:'max-content', width:'100%', margin:"0rem auto", display: 'flex', justifyContent: 'center'};
     const photoStyle = {width: '4rem', height: '4rem'};
 
-    console.log(accountDetails);
 
     var profilePhoto = `https://toysrbooks.com/dev/v0.1/photo/${accountDetails_json.uid}.png`;
     if (imageExist(profilePhoto) === false) {

@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import face_outline_inside from "./crop/face_outline_inside.png";
-import { useSelector } from 'react-redux';
 
 export const UpdatePreview = prop => {
-    // const data = useSelector(state => state.reducer);
-    // const file = data?.file;
     const preview_canvas = document.getElementById('previewCanvas');
     if (!preview_canvas) return;
     const preview_canvas_context = preview_canvas.getContext('2d')
