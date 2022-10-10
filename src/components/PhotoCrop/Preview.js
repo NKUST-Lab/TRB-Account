@@ -38,9 +38,8 @@ export const UpdatePreview = prop => {
 
     function putMask() {
         // 遮罩與圖片合併，裁剪出內容
-        const mask2 = document.getElementById('mask2');
         const image = new Image();
-        image.src = mask2.src;
+        image.src = face_outline_inside;
         if (image.complete) {
             preview_canvas_context.globalAlpha = 1; // 設定透明度
             preview_canvas_context.drawImage(image, 0, 0); // 遮罩
