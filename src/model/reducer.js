@@ -16,6 +16,11 @@ const reducer = (state = initState, action) => {
             const { file } = payload;
             return {...state, file};
         }
+
+        case "RESET_DATA": {
+            return initState;
+        }
+
         case "setData": {
             const { data } = payload;
             return {...state, ...data};

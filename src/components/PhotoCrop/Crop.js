@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { UpdatePreview } from './Preview';
-import { SetData } from "../../actions/SetData.js";
+import { SetData, RESET_DATA } from "../../actions/SetData.js";
 import { PositionOffest } from "../../actions/PositionOffest.js";
 import face_outline_outside from "./crop/face_outline_outside.png";
 
@@ -24,19 +24,11 @@ const Crop = props => {
     var crop_canvas_context;
     var crop_canvas_width, crop_canvas_height;
 
-    // reset data
+    // 離開頁面時，將上傳的圖片資料重置
     useEffect(() => {
-        console.log('render')
-        dispatch(SetData({
-            file: null, 
-            face_photo: null,
-            count: 0,
-            size: 1.0,
-            rotate: 0,
-            x: 0,
-            y: 0
-        }));
-        
+        return (() => {
+            dispatch(RESET_DATA())
+        });
     }, [])
 
     // 取得畫布在視窗的位置
@@ -52,6 +44,10 @@ const Crop = props => {
         window.onresize = function(e){ reOffset(); }
         crop_canvas.onresize = function(e){ reOffset(); }
     }, []);
+
+    useEffect(() => {
+        console.log({message: 'file was updated.', file})
+    }, [file])
 
     useEffect(() => {
         onProcessRotate();
@@ -152,14 +148,15 @@ const Crop = props => {
         }
     }
     
-
     function drawAll(){
         crop_canvas = document.getElementById('cropCanvas');
         crop_canvas_context = crop_canvas.getContext("2d");
         // 重設畫布
         crop_canvas_context.clearRect(0, 0, crop_canvas_width, crop_canvas_height);
+        console.log('clear');
 
         if (file === null) { return; }
+        console.log({message: 'drawAll', file: data})
 
         // 讓圖片可以按原比例呈現
         const {x, y, width, height, imageFile, size} = crop_image_parameters;
