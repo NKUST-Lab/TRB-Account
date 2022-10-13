@@ -24,7 +24,7 @@ const marks = [
 
 const CropSlider = props => {
     const dispatch = useDispatch();
-    const data = useSelector(state => state.reducer);
+    const data = useSelector(state => state.photoReducer);
     const size = data?.size;
 
     function handleChangeSize(value) {

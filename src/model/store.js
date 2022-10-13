@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import reducer from "./reducer.js";
+import loginReducer from "./loginReducer.js";
+import photoReducer from "./photoReducer.js";
 
 const allReducers = combineReducers({
-    reducer
+    loginReducer,
+    photoReducer
 });
 
 const store = configureStore({ 

@@ -6,7 +6,7 @@ import rotate_left from "./crop/rotate-left.png";
 import rotate_right from "./crop/rotate-right.png";
 export default function CropSettings(props) {
     const dispatch = useDispatch();
-    const data = useSelector(state => state.reducer);
+    const data = useSelector(state => state.photoReducer);
     const rotate = data?.rotate;
 
     function handleRotate(value) {

@@ -10,27 +10,18 @@ export const UpdatePreview = prop => {
     const preview_canvas_width = preview_canvas.width;
     const preview_canvas_height = preview_canvas.height;
     
-    // 重設畫布
-    preview_canvas_context.clearRect(0, 0, preview_canvas_width, preview_canvas_height);
-    putMask();
-
-    // 設定灰底背景
-    preview_canvas_context.fillStyle = "rgba(0, 0, 0, 0.5)";
-    preview_canvas_context.fillRect(0, 0, preview_canvas_width, preview_canvas_height);
-
-    // 重設畫布
-    preview_canvas_context.clearRect(0, 0, preview_canvas_width, preview_canvas_height);
-    putMask();
     
     // 複製 Crop 畫布
     const crop_canvas = document.getElementById('cropCanvas');
     const image = new Image();
     image.src = crop_canvas.toDataURL();
     if (image.complete) {
+        preview_canvas_context.clearRect(0, 0, preview_canvas_width, preview_canvas_height);
         preview_canvas_context.drawImage(image, 0, 0);
         putMask();
     } else {
         image.onload = function () {
+            preview_canvas_context.clearRect(0, 0, preview_canvas_width, preview_canvas_height);
             preview_canvas_context.drawImage(image, 0, 0);    
             putMask();
         };

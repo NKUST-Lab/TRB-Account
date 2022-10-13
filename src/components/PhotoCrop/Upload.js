@@ -5,7 +5,7 @@ import { SetData } from "../../actions/SetData.js";
 
 function Upload(props) {
     const dispatch = useDispatch();
-    const data = useSelector(state => state.reducer);
+    const data = useSelector(state => state.photoReducer);
     const file = data?.file;
     const token = 'eyJhbGciOiJIUzIEc9mz';
     const { userID } = props;

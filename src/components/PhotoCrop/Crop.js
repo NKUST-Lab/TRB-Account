@@ -7,7 +7,7 @@ import face_outline_outside from "./crop/face_outline_outside.png";
 
 const Crop = props => {
     const dispatch = useDispatch();
-    const data = useSelector(state => state.reducer);
+    const data = useSelector(state => state.photoReducer);
     const [photo, setPhoto] = useState();
     const x = data?.x;
     const y = data?.y;
@@ -153,10 +153,8 @@ const Crop = props => {
         crop_canvas_context = crop_canvas.getContext("2d");
         // 重設畫布
         crop_canvas_context.clearRect(0, 0, crop_canvas_width, crop_canvas_height);
-        console.log('clear');
 
         if (file === null) { return; }
-        console.log({message: 'drawAll', file: data})
 
         // 讓圖片可以按原比例呈現
         const {x, y, width, height, imageFile, size} = crop_image_parameters;

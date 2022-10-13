@@ -9,7 +9,8 @@ import uiConfig from '../uiConfig';
 
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { LOGIN, LOGOUT } from '../actions/Login';
 
 
 const app = firebase.initializeApp(firebaseConfig);
@@ -17,6 +18,7 @@ const app = firebase.initializeApp(firebaseConfig);
 var ui = new firebaseui.auth.AuthUI(app.auth());
 
 const Login=()=>{
+    const dispatch = useDispatch();
     let navigate = useNavigate();
 
     const initApp = function() {
@@ -32,9 +34,7 @@ const Login=()=>{
                 var phoneNumber = user.phoneNumber;
                 var providerData = user.providerData;
                 user.getIdToken().then(function(accessToken) {
-                    localStorage.setItem('sign-in-status', '已登入');
-                    localStorage.setItem('sign-in', '登出');
-                    localStorage.setItem('account-details', JSON.stringify({
+                    const data = {
                         displayName: displayName,
                         email: email,
                         emailVerified: emailVerified,
@@ -43,14 +43,14 @@ const Login=()=>{
                         uid: uid,
                         accessToken: accessToken,
                         providerData: providerData
-                    }, null, '  '));
+                    }
+                    dispatch(LOGIN(data));
                     navigate('/Profile');
                 });
             } else {
                 // User is signed out.
-                localStorage.setItem('sign-in-status', '已登出');
-                localStorage.setItem('sign-in', '登入');
-                localStorage.setItem('account-details', 'null');
+
+                dispatch(LOGOUT());
                 navigate('/Login');
             }
         }, function(error) {
@@ -60,11 +60,11 @@ const Login=()=>{
     
     useEffect(() => {
         initApp()
-        // The start method will wait until the DOM is loaded.
+        
         ui.start('#firebaseui-auth-container', uiConfig);
     }, [])
 
-    const paperStyle={padding :'1rem',height:'70vh',width:'25vw', margin:"4rem auto"}
+    const paperStyle = { padding :'1rem', height:'70vh', width:'25vw', margin:"4rem auto" }
     
     return(
         <Grid>
