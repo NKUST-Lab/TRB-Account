@@ -43,7 +43,6 @@ function Upload(props) {
         .then(response => {
             // 從回傳值取得圖片，顯示圖片
             const face_photo = response['face_photo_url'];
-            console.log(response)
             dispatch(SetData({face_photo: face_photo}));
             document.getElementById('personalImage').src = face_photo;
         })

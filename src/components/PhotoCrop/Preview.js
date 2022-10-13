@@ -1,7 +1,9 @@
 import React from 'react';
 import face_outline_inside from "./crop/face_outline_inside.png";
+import { useSelector } from 'react-redux';
 
 export const UpdatePreview = prop => {
+    const data = useSelector(state => state.photoReducer);
     const preview_canvas = document.getElementById('previewCanvas');
     if (!preview_canvas) return;
     const preview_canvas_context = preview_canvas.getContext('2d')
@@ -9,7 +11,6 @@ export const UpdatePreview = prop => {
     preview_canvas.height = 1200;
     const preview_canvas_width = preview_canvas.width;
     const preview_canvas_height = preview_canvas.height;
-    
     
     // 複製 Crop 畫布
     const crop_canvas = document.getElementById('cropCanvas');
