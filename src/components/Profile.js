@@ -19,7 +19,7 @@ const Profile = () => {
     const photoURL = accountDetails?.photoURL;
     const providerData = accountDetails?.providerData;
     const phoneNumber = accountDetails?.phoneNumber;
-
+    
     const bodyStyle = {margin: "0.5rem"};
     const navbarStyle = {padding :'0.5rem', boxSizing: 'border-box', height:'max-content', width:'100%', margin:"0rem auto", display: 'flex', justifyContent: 'center'};
     const photoStyle = {width: '4rem', height: '4rem', borderRadius: '50%'};
