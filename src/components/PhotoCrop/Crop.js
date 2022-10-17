@@ -177,7 +177,7 @@ const Crop = props => {
         }
 
         // 更新預覽畫面
-        // UpdatePreview();
+        UpdatePreview();
         
         const maskImage = new Image();
         maskImage.src = face_outline_outside;
