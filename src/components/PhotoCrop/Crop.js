@@ -46,10 +46,6 @@ const Crop = props => {
     }, []);
 
     useEffect(() => {
-        console.log({message: 'file was updated.', file})
-    }, [file])
-
-    useEffect(() => {
         onProcessRotate();
     }, [file, rotate]);
 
@@ -181,7 +177,7 @@ const Crop = props => {
         }
 
         // 更新預覽畫面
-        UpdatePreview();
+        // UpdatePreview();
         
         const maskImage = new Image();
         maskImage.src = face_outline_outside;

@@ -9,8 +9,8 @@ const reducer = (state = initState, action) => {
     const { type, payload } = action;
     switch (type) {
         case "LOGIN": {
-            const accountDetails = payload.data;
-
+            const { accountDetails } = payload;
+            
             const nextState = {
                 signInStatus: '已登入',
                 signIn: '登出',

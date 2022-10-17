@@ -2,7 +2,7 @@ export const LOGIN = (accountDetails) => {
     return {
         type: "LOGIN",
         payload: {
-            data: accountDetails
+            accountDetails
         }
     }
 }
